@@ -6,7 +6,7 @@
 /*   By: thcardos <thcardos@student.42malaga.co>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 13:04:25 by thcardos          #+#    #+#             */
-/*   Updated: 2026/05/05 14:16:23 by thcardos         ###   ########.fr       */
+/*   Updated: 2026/05/05 17:26:28 by thcardos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	free_stack(t_stack *s);
 /* ─── stack_init.c ─── */
 t_stack	*stack_new(void);
 void	stack_push(t_stack *s, int val);
-void	assign_ranks(t_stack *a);
 
 /* ─── stack_ops_a.c ─── */
 void	sa(t_stack *a);
@@ -69,7 +68,10 @@ void	sort_small(t_stack *a, t_stack *b);
 void	sort_big(t_stack *a, t_stack *b);
 
 /* ─── utils.c ─── */
-int		is_sorted(t_stack *a);
-int		get_max_bits(t_stack *a);
+int     is_sorted(t_stack *a);
+int     find_min_pos(t_stack *a);      // posición del mínimo en A
+int     find_target_pos(t_stack *a, int val); // dónde insertar val en A
+int     get_cost(t_stack *a, t_stack *b, t_node *node); // coste total de un nodo
+void    do_cheapest(t_stack *a, t_stack *b); // ejecuta la operación más barata
 
 #endif
