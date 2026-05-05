@@ -6,7 +6,7 @@
 /*   By: thcardos <thcardos@student.42malaga.co>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 14:14:30 by thcardos          #+#    #+#             */
-/*   Updated: 2026/05/05 14:14:31 by thcardos         ###   ########.fr       */
+/*   Updated: 2026/05/05 17:10:10 by thcardos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,3 @@ void	stack_push(t_stack *s, int val)
 	s->size++;
 }
 
-void	assign_ranks(t_stack *a)
-{
-	t_node	*i;
-	t_node	*j;
-	int		rank;
-
-	i = a->top;
-	while (i)
-	{
-		rank = 0;
-		j = a->top;
-		while (j)
-		{
-			if (j->val < i->val)
-				rank++;
-			j = j->next;
-		}
-		i->rank = rank;
-		i = i->next;
-	}
-}
