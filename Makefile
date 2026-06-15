@@ -21,10 +21,13 @@ SRCS = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/stack_ops_a.c \
 		$(SRC_DIR)/stack_ops_b.c \
 		$(SRC_DIR)/stack_ops_both.c \
+		$(SRC_DIR)/stack_ops_helpers.c \
 		$(SRC_DIR)/sort_small.c \
 		$(SRC_DIR)/sort_big.c \
-		$(SRC_DIR)/utils.c
-
+		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/utils_cost.c \
+		$(SRC_DIR)/utils_cost_exec.c 
+		
 BONUS_SRCS = $(SRC_DIR)/checker_bonus.c \
         $(SRC_DIR)/parsing.c \
         $(SRC_DIR)/errors.c \
@@ -32,7 +35,10 @@ BONUS_SRCS = $(SRC_DIR)/checker_bonus.c \
         $(SRC_DIR)/stack_ops_a.c \
         $(SRC_DIR)/stack_ops_b.c \
         $(SRC_DIR)/stack_ops_both.c \
-        $(SRC_DIR)/utils.c
+		$(SRC_DIR)/stack_ops_helpers.c \
+        $(SRC_DIR)/utils.c \
+		$(SRC_DIR)/utils_cost.c \
+		$(SRC_DIR)/utils_cost_exec.c 
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 BONUS_OBJS = $(BONUS_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
