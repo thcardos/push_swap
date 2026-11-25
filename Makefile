@@ -14,65 +14,54 @@ PRINTF_DIR = ft_printf
 LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-SRCS = $(SRC_DIR)/main.c \
+SRCS = $(SRC_DIR)/errors.c \
 		$(SRC_DIR)/parsing.c \
-		$(SRC_DIR)/errors.c \
+		$(SRC_DIR)/push_swap.c \
+		$(SRC_DIR)/sort_big.c \
+		$(SRC_DIR)/sort_small.c \
 		$(SRC_DIR)/stack_init.c \
 		$(SRC_DIR)/stack_ops_a.c \
 		$(SRC_DIR)/stack_ops_b.c \
 		$(SRC_DIR)/stack_ops_both.c \
 		$(SRC_DIR)/stack_ops_helpers.c \
-		$(SRC_DIR)/sort_small.c \
-		$(SRC_DIR)/sort_big.c \
-		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/utils_cost_exec.c \
 		$(SRC_DIR)/utils_cost.c \
-		$(SRC_DIR)/utils_cost_exec.c 
+		$(SRC_DIR)/utils.c 
 		
-BONUS_SRCS = $(SRC_DIR)/checker_bonus.c \
-        $(SRC_DIR)/parsing.c \
-        $(SRC_DIR)/errors.c \
-        $(SRC_DIR)/stack_init.c \
-        $(SRC_DIR)/stack_ops_a.c \
-        $(SRC_DIR)/stack_ops_b.c \
-        $(SRC_DIR)/stack_ops_both.c \
-		$(SRC_DIR)/stack_ops_helpers.c \
-        $(SRC_DIR)/utils.c \
-		$(SRC_DIR)/utils_cost.c \
-		$(SRC_DIR)/utils_cost_exec.c 
-
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-BONUS_OBJS = $(BONUS_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(OBJ_DIR) $(NAME)
+	@echo "Building Project..."
+	@$(MAKE) -s $(NAME) || { echo "An Error Occurred"; exit 1; }
+	@echo "All Done!"
 
 $(NAME): $(OBJS) $(LIBFT) $(PRINTF)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf -o $(NAME)
-
-bonus: $(BONUS_OBJS) $(LIBFT) $(PRINTF)
-	$(CC) $(CFLAGS) $(BONUS_OBJS) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf -o $(BONUS_NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf -o $(NAME)
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	@$(MAKE) -s -C $(LIBFT_DIR)
 
 $(PRINTF):
-	make -C $(PRINTF_DIR)
+	@$(MAKE) -s -C $(PRINTF_DIR)
 
 clean:
-	make -C $(LIBFT_DIR) clean
-	make -C $(PRINTF_DIR) clean
-	$(RM) -r $(OBJ_DIR)
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	@$(MAKE) -s -C $(PRINTF_DIR) clean
+	@$(RM) -r $(OBJ_DIR)
+	@echo "Cleaned object files."
 
 fclean: clean
-	make -C $(LIBFT_DIR) fclean
-	make -C $(PRINTF_DIR) fclean
-	$(RM) $(NAME) $(BONUS_NAME)
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@$(MAKE) -s -C $(PRINTF_DIR) fclean
+	@$(RM) $(NAME)
+	@echo "Fully cleaned."
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
